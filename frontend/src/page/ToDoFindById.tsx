@@ -31,7 +31,7 @@ export const ToDoFindById = () => {
                 setToDoSubs(res.sub);
             })
             .catch(err => console.log(err));
-    }, [id, setValue]);
+    }, [id, setValue, model]);
 
     const handleStatusChange = (id: number, status: Status) => {
         const data: ToDoPatchType = { status };

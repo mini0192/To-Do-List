@@ -1,8 +1,7 @@
 import {useEffect} from "react";
 import {ToDoSubPutType} from "../../type/ToDoSub.tsx";
-import {ToDoSubFindByIdApi, ToDoSubPutApi} from "../../api/ToDoSubApis.tsx";
+import {ToDoSubDeleteApi, ToDoSubFindByIdApi, ToDoSubPutApi} from "../../api/ToDoSubApis.tsx";
 import {useForm} from "react-hook-form";
-import {ToDoDeleteApi} from "../../api/ToDoApis.tsx";
 
 interface ToDoSubFindByIdProps {
     id: number;
@@ -50,7 +49,7 @@ export const ToDoSubFindById = ({ id, setModel }: ToDoSubFindByIdProps) => {
                         <button type="submit" className="btn btn-info btn-sm w-100 py-1 fw-bold text-white">수정</button>
                         <button type="button" className="btn btn-danger btn-sm w-100 py-1 fw-bold text-white mt-2"
                                 onClick={() => {
-                                    ToDoDeleteApi(Number(id))
+                                    ToDoSubDeleteApi(Number(id))
                                         .then(() => setModel(0))
                                         .catch(err => console.log(err));
                                 }}>삭제

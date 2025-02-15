@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  backend:
+    image: parkgw9071/backend
+    container_name: backend
+    ports:
+      - "8080:8080"
+
+  frontend:
+    image: parkgw9071/frontend
+    container_name: frontend
+    ports:
+      - "3000:80"
