@@ -1,14 +1,44 @@
 version: '3.8'
 
 services:
+  mysql:
+    image: mysql
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./setting.sql:/docker-entrypoint-initdb.d/setting.sql
+    networks:
+      - server
+
   backend:
     image: parkgw9071/backend
     container_name: backend
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      mysql: mysql
+      mysqlUser: root
+      mysqlPass: password
     ports:
       - "8080:8080"
+    networks:
+      - server
 
   frontend:
     image: parkgw9071/frontend
     container_name: frontend
+    restart: always
     ports:
       - "3000:80"
+    environment:
+      VITE_API_URL: http://backend:8080
+    networks:
+      - server
+
+networks:
+  server:
