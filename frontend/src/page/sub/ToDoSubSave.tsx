@@ -18,9 +18,9 @@ export const ToDoSubSave = () => {
     };
 
     return (
-        <div className="d-flex justify-content-center align-items-center vh-100">
+        <div className="d-flex justify-content-center align-items-center">
             <div className="card p-3 shadow-sm" style={{ width: "400px", borderRadius: "10px" }}>
-                <h4 className="text-center mb-3 fw-semibold">하위 내용 추가하기</h4>
+                <h4 className="text-center mb-3 fw-semibold">세부 일정 추가하기</h4>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-floating mb-2">
                         <input

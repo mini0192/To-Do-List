@@ -69,7 +69,7 @@ export const ToDoFindById = () => {
         <>
             {model !== 0 && <div className="modal-overlay"></div>}
             {model !== 0 ? <ToDoSubFindById id={model} setModel={setModel} /> : null}
-            <div className="d-flex justify-content-center align-items-center vh-100">
+            <div className="d-flex justify-content-center align-items-center">
                 <div className="d-flex gap-3">
                     <div className="card p-3 shadow-sm" style={{ width: "400px", borderRadius: "10px" }}>
                         <h4 className="text-center mb-3 fw-semibold">수정하기</h4>
@@ -141,7 +141,7 @@ export const ToDoFindById = () => {
                             <tbody>
                             {toDoSubs?.map((toDoSub: ToDoSubFindByIdType) => (
                                 <tr key={toDoSub.id} className="text-center">
-                                    <td className="text-start">
+                                    <td className="text-center">  {/* 중앙 정렬 */}
                                         <button
                                             type="button"
                                             className="btn btn-link fw-semibold text-decoration-none p-0"
@@ -149,8 +149,8 @@ export const ToDoFindById = () => {
                                         >
                                             {toDoSub.title}
                                         </button>
-
                                     </td>
+
                                     <td>
                                         <select
                                             className="form-select form-select-sm"

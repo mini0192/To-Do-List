@@ -34,20 +34,20 @@ export const ToDoFindAll = () => {
     return (
         <div className="container mt-4">
             <div className="card shadow-sm p-3">
-                <h4 className="text-center fw-bold mb-3">To-Do List</h4>
+                <h4 className="text-center fw-bold mb-3">일정</h4>
                 <table className="table table-hover align-middle">
                     <thead>
                     <tr className="table-light text-center">
-                        <th scope="col">Title</th>
-                        <th scope="col">Priority</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Due Date</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">중요도</th>
+                        <th scope="col">상태</th>
+                        <th scope="col">마감 시간</th>
                     </tr>
                     </thead>
                     <tbody>
                     {toDos?.content.map((todo) => (
                         <tr key={todo.id} className="text-center">
-                            <td className="text-start">
+                            <td className="text-center">  {/* 중앙 정렬로 변경 */}
                                 <Link to={`/${todo.id}`} className="fw-semibold text-decoration-none">
                                     {todo.title}
                                 </Link>

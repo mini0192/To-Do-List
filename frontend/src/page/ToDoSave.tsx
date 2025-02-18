@@ -16,7 +16,7 @@ export const ToDoSave = () => {
     };
 
     return (
-        <div className="d-flex justify-content-center align-items-center vh-100">
+        <div className="d-flex justify-content-center align-items-center">
             <div className="card p-3 shadow-sm" style={{ width: "400px", borderRadius: "10px" }}>
                 <h4 className="text-center mb-3 fw-semibold">추가하기</h4>
                 <form onSubmit={handleSubmit(onSubmit)}>
