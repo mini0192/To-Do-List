@@ -17,7 +17,7 @@ docker-compose up -d
 
 ### Frontend(container: frontend)
 **URL:** http://localhost:3000
-'
+
 ### 인프라
 ![img](./infra.png)
 FrontEnd 앞에 Nginx를 둠으로써 리버스 프록시와 접근 속도를 개선했습니다.
