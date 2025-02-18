@@ -465,7 +465,7 @@ class ToDoControllerTest {
         }
 
         @Test
-        @DisplayName("실패 Title 누락 [Title: null, content: b, null, unixTime: 0L]")
+        @DisplayName("기본 수정 [Title: null, content: b, priority: null, unixTime: 0L]")
         void test6() throws Exception {
             ToDoRequest.ToDoPut request = new ToDoRequest.ToDoPut(null, "b", null, 0L);
             String json = objectMapper.writeValueAsString(request);
@@ -473,11 +473,13 @@ class ToDoControllerTest {
             mockMvc.perform(put(URL + "/{id}", 1L)
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(json))
-                    .andExpect(status().isBadRequest());
+                    .andExpect(status().isOk());
+
+            verify(toDoService).put(1L, request);
         }
 
         @Test
-        @DisplayName("실패 Content 누락 [Title: a, content: null, null, unixTime: 0L]")
+        @DisplayName("기본 수정 [Title: a, content: null, priority: null, unixTime: 0L]")
         void test7() throws Exception {
             ToDoRequest.ToDoPut request = new ToDoRequest.ToDoPut("a", null, null, 0L);
             String json = objectMapper.writeValueAsString(request);
@@ -485,11 +487,13 @@ class ToDoControllerTest {
             mockMvc.perform(put(URL + "/{id}", 1L)
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(json))
-                    .andExpect(status().isBadRequest());
+                    .andExpect(status().isOk());
+
+            verify(toDoService).put(1L, request);
         }
 
         @Test
-        @DisplayName("실패 UnixTime 누락 [Title: a, content: b, null, unixTime: null]")
+        @DisplayName("기본 수정 [Title: a, content: b, priority: null, unixTime: null]")
         void test8() throws Exception {
             ToDoRequest.ToDoPut request = new ToDoRequest.ToDoPut("a", "b", null, null);
             String json = objectMapper.writeValueAsString(request);
@@ -497,9 +501,10 @@ class ToDoControllerTest {
             mockMvc.perform(put(URL + "/{id}", 1L)
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(json))
-                    .andExpect(status().isBadRequest());
-        }
+                    .andExpect(status().isOk());
 
+            verify(toDoService).put(1L, request);
+        }
         @Test
         @DisplayName("실패 Title 크기 초과 [Title: a * 51, content: b, null, unixTime: 0L]")
         void test9() throws Exception {

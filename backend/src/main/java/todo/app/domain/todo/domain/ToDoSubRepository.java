@@ -18,10 +18,10 @@ public class ToDoSubRepository {
     }
 
     public void save(ToDoSub entity) {
-        em.persist(entity);
-    }
-
-    public void update(ToDoSub entity) {
+        if(entity.getId() == null) {
+            em.persist(entity);
+            return;
+        }
         em.merge(entity);
     }
 

@@ -27,11 +27,9 @@ public class ToDoSubRequest {
     }
 
     public record ToDoSubPut(
-            @NotBlank
             @Size(min = 1, max = 50)
             String title,
 
-            @NotBlank
             @Size(min = 1, max = 1000)
             String content
     ) {}

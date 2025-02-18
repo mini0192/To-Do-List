@@ -40,14 +40,12 @@ public class ToDoService {
     public void put(Long id, ToDoRequest.ToDoPut dto) {
         ToDo entity = toDoRepository.findById(id);
         entity.update(dto.title(), dto.content(), dto.priority(), dto.unixTime());
-        toDoRepository.update(entity);
     }
 
     @Transactional
     public void patchStatus(Long id, ToDoRequest.ToDoPatchStatus dto) {
         ToDo entity = toDoRepository.findById(id);
         entity.patchStatus(dto.status());
-        toDoRepository.update(entity);
     }
 
     @Transactional

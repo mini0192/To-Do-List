@@ -72,10 +72,10 @@ public class ToDoRepository {
     }
 
     public void save(ToDo entity) {
-        em.persist(entity);
-    }
-
-    public void update(ToDo entity) {
+        if(entity.getId() == null) {
+            em.persist(entity);
+            return;
+        }
         em.merge(entity);
     }
 

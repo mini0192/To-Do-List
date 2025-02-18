@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(ToDoSubController.class)
 class ToDoSubControllerTest {
-    private final String URL = "/api/v1/todos/sub";
+    private final String URL = "/api/v1/todos/subs";
 
     @Autowired
     private MockMvc mockMvc;
@@ -144,7 +144,7 @@ class ToDoSubControllerTest {
         }
 
         @Test
-        @DisplayName("실패 Title 누락 [Title: null, content: b]")
+        @DisplayName("기본 수정 [Title: null, content: b]")
         void test2() throws Exception {
             ToDoSubRequest.ToDoSubPut request = new ToDoSubRequest.ToDoSubPut(null, "b");
             String json = objectMapper.writeValueAsString(request);
@@ -152,11 +152,13 @@ class ToDoSubControllerTest {
             mockMvc.perform(put(URL + "/{id}", 1L)
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(json))
-                    .andExpect(status().isBadRequest());
+                    .andExpect(status().isOk());
+
+            verify(toDoSubService).put(1L, request);
         }
 
         @Test
-        @DisplayName("실패 Content 누락 [Title: a, content: null]")
+        @DisplayName("기본 수정 [Title: a, content: null]")
         void test3() throws Exception {
             ToDoSubRequest.ToDoSubPut request = new ToDoSubRequest.ToDoSubPut("a", null);
             String json = objectMapper.writeValueAsString(request);
@@ -164,7 +166,9 @@ class ToDoSubControllerTest {
             mockMvc.perform(put(URL + "/{id}", 1L)
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(json))
-                    .andExpect(status().isBadRequest());
+                    .andExpect(status().isOk());
+
+            verify(toDoSubService).put(1L, request);
         }
 
         @Test

@@ -33,14 +33,12 @@ public class ToDoSubService {
     public void put(Long id, ToDoSubRequest.ToDoSubPut dto) {
         ToDoSub entity = toDoSubRepository.findById(id);
         entity.update(dto.title(), dto.content());
-        toDoSubRepository.update(entity);
     }
 
     @Transactional
     public void patchStatus(Long id, ToDoSubRequest.ToDoSubPatchStatus dto) {
         ToDoSub entity = toDoSubRepository.findById(id);
         entity.patchStatus(dto.status());
-        toDoSubRepository.update(entity);
     }
 
     @Transactional
