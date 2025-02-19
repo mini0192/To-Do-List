@@ -19,9 +19,9 @@ public class ToDoService {
 
     private final ToDoRepository toDoRepository;
 
-    public Page<ToDoResponse.ToDoFindAll> findAll(int page, SortBy sort, Status status) {
+    public Page<ToDoResponse.ToDoFindAll> findAll(int page, SortBy sort) {
         Pageable pageable = PageRequest.of(page, 30);
-        Page<ToDo> entityPage = toDoRepository.findAll(pageable, sort, status);
+        Page<ToDo> entityPage = toDoRepository.findAll(pageable, sort);
         return entityPage.map(ToDoResponse.ToDoFindAll::toDto);
     }
 

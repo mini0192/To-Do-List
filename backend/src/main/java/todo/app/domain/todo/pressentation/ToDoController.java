@@ -27,9 +27,8 @@ public class ToDoController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Page<ToDoResponse.ToDoFindAll>> findAll(
             @RequestParam(required = false, defaultValue = "1", value = "page") @Min(1) int page,
-            @RequestParam(required = false, value = "status") Status status,
             @RequestParam(value = "sort") SortBy sort) {
-        return ResponseEntity.ok(toDoService.findAll(page - 1, sort, status));
+        return ResponseEntity.ok(toDoService.findAll(page - 1, sort));
     }
 
     @StatusOkDoc @Operation(summary = "상세 조회")

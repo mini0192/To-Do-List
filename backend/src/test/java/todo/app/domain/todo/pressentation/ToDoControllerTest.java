@@ -42,11 +42,11 @@ class ToDoControllerTest {
     @DisplayName("FindAll")
     class FindAll {
         @Test
-        @DisplayName("기본 조회 [page: null, status: null, sort: ASC]")
+        @DisplayName("기본 조회 [page: null, sort: ASC]")
         void test1() throws Exception {
             ToDoResponse.ToDoFindAll response = new ToDoResponse.ToDoFindAll(1L, "Test ToDo", PriorityType.HIGH, Status.IN_PROGRESS, 1004L);
 
-            BDDMockito.given(toDoService.findAll(anyInt(), any(), any()))
+            BDDMockito.given(toDoService.findAll(anyInt(), any()))
                     .willReturn(new PageImpl<>(List.of(response)));
 
             mockMvc.perform(get(URL)
@@ -59,15 +59,15 @@ class ToDoControllerTest {
                     .andExpect(jsonPath("$.content[0].status").value(Status.IN_PROGRESS.toString()))
                     .andExpect(jsonPath("$.content[0].unixTime").value(1004L));
 
-            verify(toDoService).findAll(eq(0), eq(SortBy.ASC), any());
+            verify(toDoService).findAll(eq(0), eq(SortBy.ASC));
         }
 
         @Test
-        @DisplayName("기본 조회 [page: null, status: null, sort: DESC]")
+        @DisplayName("기본 조회 [page: null, sort: DESC]")
         void test2() throws Exception {
             ToDoResponse.ToDoFindAll response = new ToDoResponse.ToDoFindAll(1L, "Test ToDo", PriorityType.HIGH, Status.IN_PROGRESS, 1004L);
 
-            BDDMockito.given(toDoService.findAll(anyInt(), any(), any()))
+            BDDMockito.given(toDoService.findAll(anyInt(), any()))
                     .willReturn(new PageImpl<>(List.of(response)));
 
             mockMvc.perform(get(URL)
@@ -80,15 +80,15 @@ class ToDoControllerTest {
                     .andExpect(jsonPath("$.content[0].status").value(Status.IN_PROGRESS.toString()))
                     .andExpect(jsonPath("$.content[0].unixTime").value(1004L));
 
-            verify(toDoService).findAll(eq(0), eq(SortBy.DESC), any());
+            verify(toDoService).findAll(eq(0), eq(SortBy.DESC));
         }
 
         @Test
-        @DisplayName("기본 조회 [page: 1, status: null, sort: ASC]")
+        @DisplayName("기본 조회 [page: 1, sort: ASC]")
         void test3() throws Exception {
             ToDoResponse.ToDoFindAll response = new ToDoResponse.ToDoFindAll(1L, "Test ToDo", PriorityType.HIGH, Status.IN_PROGRESS, 1004L);
 
-            BDDMockito.given(toDoService.findAll(anyInt(), any(), any()))
+            BDDMockito.given(toDoService.findAll(anyInt(), any()))
                     .willReturn(new PageImpl<>(List.of(response)));
 
             mockMvc.perform(get(URL)
@@ -102,19 +102,18 @@ class ToDoControllerTest {
                     .andExpect(jsonPath("$.content[0].status").value(Status.IN_PROGRESS.toString()))
                     .andExpect(jsonPath("$.content[0].unixTime").value(1004L));
 
-            verify(toDoService).findAll(eq(1), eq(SortBy.ASC), any());
+            verify(toDoService).findAll(eq(1), eq(SortBy.ASC));
         }
 
         @Test
-        @DisplayName("기본 조회 [page: null, status: NOT_STARTED, sort: ASC]")
+        @DisplayName("기본 조회 [page: null, sort: ASC]")
         void test4() throws Exception {
             ToDoResponse.ToDoFindAll response = new ToDoResponse.ToDoFindAll(1L, "Test ToDo", PriorityType.HIGH, Status.NOT_STARTED, 1004L);
 
-            BDDMockito.given(toDoService.findAll(anyInt(), any(), any()))
+            BDDMockito.given(toDoService.findAll(anyInt(), any()))
                     .willReturn(new PageImpl<>(List.of(response)));
 
             mockMvc.perform(get(URL)
-                            .param("status", Status.NOT_STARTED.toString())
                             .param("sort", SortBy.ASC.toString())
                             .accept(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk())
@@ -124,19 +123,18 @@ class ToDoControllerTest {
                     .andExpect(jsonPath("$.content[0].status").value(Status.NOT_STARTED.toString()))
                     .andExpect(jsonPath("$.content[0].unixTime").value(1004L));
 
-            verify(toDoService).findAll(eq(0), eq(SortBy.ASC), eq(Status.NOT_STARTED));
+            verify(toDoService).findAll(eq(0), eq(SortBy.ASC));
         }
 
         @Test
-        @DisplayName("기본 조회 [page: null, status: IN_PROGRESS, sort: ASC]")
+        @DisplayName("기본 조회 [page: null, sort: ASC]")
         void test5() throws Exception {
             ToDoResponse.ToDoFindAll response = new ToDoResponse.ToDoFindAll(1L, "Test ToDo", PriorityType.HIGH, Status.IN_PROGRESS, 1004L);
 
-            BDDMockito.given(toDoService.findAll(anyInt(), any(), any()))
+            BDDMockito.given(toDoService.findAll(anyInt(), any()))
                     .willReturn(new PageImpl<>(List.of(response)));
 
             mockMvc.perform(get(URL)
-                            .param("status", Status.IN_PROGRESS.toString())
                             .param("sort", SortBy.ASC.toString())
                             .accept(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk())
@@ -146,19 +144,18 @@ class ToDoControllerTest {
                     .andExpect(jsonPath("$.content[0].status").value(Status.IN_PROGRESS.toString()))
                     .andExpect(jsonPath("$.content[0].unixTime").value(1004L));
 
-            verify(toDoService).findAll(eq(0), eq(SortBy.ASC), eq(Status.IN_PROGRESS));
+            verify(toDoService).findAll(eq(0), eq(SortBy.ASC));
         }
 
         @Test
-        @DisplayName("기본 조회 [page: null, status: COMPLETED, sort: ASC]")
+        @DisplayName("기본 조회 [page: null, sort: ASC]")
         void test6() throws Exception {
             ToDoResponse.ToDoFindAll response = new ToDoResponse.ToDoFindAll(1L, "Test ToDo", PriorityType.HIGH, Status.COMPLETED, 1004L);
 
-            BDDMockito.given(toDoService.findAll(anyInt(), any(), any()))
+            BDDMockito.given(toDoService.findAll(anyInt(), any()))
                     .willReturn(new PageImpl<>(List.of(response)));
 
             mockMvc.perform(get(URL)
-                            .param("status", Status.COMPLETED.toString())
                             .param("sort", SortBy.ASC.toString())
                             .accept(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk())
@@ -168,20 +165,19 @@ class ToDoControllerTest {
                     .andExpect(jsonPath("$.content[0].status").value(Status.COMPLETED.toString()))
                     .andExpect(jsonPath("$.content[0].unixTime").value(1004L));
 
-            verify(toDoService).findAll(eq(0), eq(SortBy.ASC), eq(Status.COMPLETED));
+            verify(toDoService).findAll(eq(0), eq(SortBy.ASC));
         }
 
         @Test
-        @DisplayName("기본 조회 [page: 1, status: IN_PROGRESS, sort: ASC]")
+        @DisplayName("기본 조회 [page: 1, sort: ASC]")
         void test7() throws Exception {
             ToDoResponse.ToDoFindAll response = new ToDoResponse.ToDoFindAll(1L, "Test ToDo", PriorityType.HIGH, Status.IN_PROGRESS, 1004L);
 
-            BDDMockito.given(toDoService.findAll(anyInt(), any(), any()))
+            BDDMockito.given(toDoService.findAll(anyInt(), any()))
                     .willReturn(new PageImpl<>(List.of(response)));
 
             mockMvc.perform(get(URL)
                             .param("page", "2")
-                            .param("status", Status.IN_PROGRESS.toString())
                             .param("sort", SortBy.ASC.toString())
                             .accept(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk())
@@ -191,11 +187,11 @@ class ToDoControllerTest {
                     .andExpect(jsonPath("$.content[0].status").value(Status.IN_PROGRESS.toString()))
                     .andExpect(jsonPath("$.content[0].unixTime").value(1004L));
 
-            verify(toDoService).findAll(eq(1), eq(SortBy.ASC), eq(Status.IN_PROGRESS));
+            verify(toDoService).findAll(eq(1), eq(SortBy.ASC));
         }
 
         @Test
-        @DisplayName("실패 Sort가 Null일 때 [page: null, status: null, sort: null]")
+        @DisplayName("실패 Sort가 Null일 때 [page: null, sort: null]")
         void test8() throws Exception {
             mockMvc.perform(get(URL)
                             .accept(MediaType.APPLICATION_JSON))
@@ -203,7 +199,7 @@ class ToDoControllerTest {
         }
 
         @Test
-        @DisplayName("실패 Page가 1 이하 일 때 [page: 0, status: null, sort: ASC]")
+        @DisplayName("실패 Page가 1 이하 일 때 [page: 0, sort: ASC]")
         void test9() throws Exception {
             mockMvc.perform(get(URL)
                             .param("page", "0")
@@ -213,20 +209,10 @@ class ToDoControllerTest {
         }
 
         @Test
-        @DisplayName("실패 잘못된 Sort 값 [page: null, status: null, sort: TEST]")
+        @DisplayName("실패 잘못된 Sort 값 [page: null, sort: TEST]")
         void test10() throws Exception {
             mockMvc.perform(get(URL)
                             .param("sort", "TEST")
-                            .accept(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isBadRequest());
-        }
-
-        @Test
-        @DisplayName("실패 잘못된 Status 값 [page: null, status: TEST, sort: ASC]")
-        void test11() throws Exception {
-            mockMvc.perform(get(URL)
-                            .param("status", "TEST")
-                            .param("sort", SortBy.ASC.toString())
                             .accept(MediaType.APPLICATION_JSON))
                     .andExpect(status().isBadRequest());
         }
